@@ -3,6 +3,7 @@ const contactForm = document.getElementById("contactForm");
 const formStatus = document.getElementById("formStatus");
 const scrollTopBtn = document.getElementById("scrollTopBtn");
 const revealElements = document.querySelectorAll(".reveal");
+const themeToggleBtn = document.getElementById("themeToggleBtn");
 
 const stats = [
   { elementId: "stat1", target: 12, suffix: "+" },
@@ -11,6 +12,26 @@ const stats = [
 ];
 
 yearElement.textContent = new Date().getFullYear();
+
+const setTheme = (theme) => {
+  const isLightTheme = theme === "light";
+  document.body.classList.toggle("light-theme", isLightTheme);
+
+  if (themeToggleBtn) {
+    themeToggleBtn.textContent = isLightTheme ? "Dark theme" : "White theme";
+  }
+};
+
+const savedTheme = localStorage.getItem("themePreference");
+setTheme(savedTheme === "light" ? "light" : "dark");
+
+if (themeToggleBtn) {
+  themeToggleBtn.addEventListener("click", () => {
+    const nextTheme = document.body.classList.contains("light-theme") ? "dark" : "light";
+    setTheme(nextTheme);
+    localStorage.setItem("themePreference", nextTheme);
+  });
+}
 
 document.querySelectorAll('a[href^="#"]').forEach((link) => {
   link.addEventListener("click", (event) => {
