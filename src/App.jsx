@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Card from './Card';
+import QuickNote from './QuickNote';
 
 const projects = [
   { title: "Proiect 1", description: "Pagina personala" },
@@ -20,6 +21,7 @@ function App() {
       {projects.map(function (item, index) {
         return <Card key={index} title={item.title} description={item.description} />;
       })}
+      <QuickNote />
     </div>
   );
 }
