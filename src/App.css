@@ -210,6 +210,44 @@ button:hover {
   gap: 4px;
 }
 
+nav {
+  display: flex;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 12px;
+  background: #2c3e50;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: #ffffff;
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+}
+
+nav a:hover {
+  background: #34495e;
+}
+
+nav a.active {
+  background: #ff7733;
+}
+
+.route-content {
+  min-height: 260px;
+}
+
+.app-footer {
+  margin-top: 14px;
+  background: #0f172a;
+  color: #f8fafc;
+  border-radius: 12px;
+  padding: 14px;
+  text-align: center;
+}
+
 @media (max-width: 640px) {
   .app-shell {
     margin-top: 12px;

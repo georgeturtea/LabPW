@@ -1,51 +1,38 @@
-import { useState } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router';
 import './App.css';
-import QuickNote from './QuickNote';
-import TodoList from './TodoList';
-import ContactForm from './ContactForm';
-import Clock from './Clock';
-import ProjectList from './ProjectList';
-import PublicUsers from './PublicUsers';
+import Navbar from './Navbar';
+import Footer from './Footer';
+import Home from './pages/Home';
+import Projects from './pages/Projects';
+import Contact from './pages/Contact';
+import NotFound from './pages/NotFound';
+import About from './pages/About';
+
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <div className="app-shell">
-      <header className="app-header">
-        <h1>Dashboard React - Lab 6</h1>
-        <p>Fetch, incarcare date, filtrare si statistici</p>
-      </header>
+    <BrowserRouter>
+      <div className="app-shell">
+        <header className="app-header">
+          <h1>Dashboard React - Lab 7</h1>
+          <p>Navigare intre pagini cu React Router</p>
+        </header>
 
-      <section className="panel counter-panel">
-        <h2>Counter recap</h2>
-        <p>Ai apasat de {count} ori</p>
-        <div className="button-row">
-          <button onClick={() => setCount(count + 1)}>+1</button>
-          <button onClick={() => setCount(count - 1)}>-1</button>
-          <button onClick={() => setCount(0)}>Reset</button>
-        </div>
-      </section>
+        <Navbar />
 
-      <section className="panel">
-        <ProjectList />
-      </section>
+        <main className="route-content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/about" element={<About />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
 
-      <section className="panel">
-        <PublicUsers />
-      </section>
-
-      <section className="grid-two">
-        <QuickNote />
-        <TodoList />
-      </section>
-
-      <section className="grid-two">
-        <ContactForm />
-        <Clock />
-      </section>
-    </div>
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }
-
 
 export default App;
