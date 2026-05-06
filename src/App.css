@@ -164,6 +164,52 @@ button:hover {
   color: #0f172a;
 }
 
+.search-input {
+  margin: 10px 0 14px;
+}
+
+.status-chip {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #1f4d69;
+  font-weight: 600;
+}
+
+.stats-box {
+  margin-top: 14px;
+  padding: 12px;
+  border: 1px solid #d9e4ee;
+  border-radius: 10px;
+  background: #f8fbff;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.error-text {
+  color: #b42318;
+  font-weight: 700;
+}
+
+.user-list {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 10px;
+}
+
+.user-item {
+  border: 1px solid #d9e4ee;
+  border-radius: 10px;
+  background: #f8fafc;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
 @media (max-width: 640px) {
   .app-shell {
     margin-top: 12px;

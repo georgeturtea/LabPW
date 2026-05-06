@@ -1,0 +1,8 @@
+{
+ "projects": [
+ { "id": 1, "title": "Pagina Personala", "tech": "HTML, CSS", "done": true },
+ { "id": 2, "title": "Calculator Buget", "tech": "HTML, CSS, JS", "done": true },
+ { "id": 3, "title": "Dashboard React", "tech": "React", "done": false },
+ { "id": 4, "title": "API Meteo", "tech": "React, API", "done": false }
+ ]
+}

@@ -1,24 +1,19 @@
 import { useState } from 'react';
 import './App.css';
-import Card from './Card';
 import QuickNote from './QuickNote';
 import TodoList from './TodoList';
 import ContactForm from './ContactForm';
 import Clock from './Clock';
-
-const projects = [
-  { title: "Proiect 1", description: "Pagina personala" },
-  { title: "Proiect 2", description: "Calculator buget" },
-  { title: "Proiect 3", description: "Dashboard React" },
-];
+import ProjectList from './ProjectList';
+import PublicUsers from './PublicUsers';
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <div className="app-shell">
       <header className="app-header">
-        <h1>Dashboard React - Lab 5</h1>
-        <p>Exercitii cu useState, useEffect si input controlat</p>
+        <h1>Dashboard React - Lab 6</h1>
+        <p>Fetch, incarcare date, filtrare si statistici</p>
       </header>
 
       <section className="panel counter-panel">
@@ -32,12 +27,11 @@ function App() {
       </section>
 
       <section className="panel">
-        <h2>Proiecte</h2>
-        <div className="project-grid">
-          {projects.map(function (item, index) {
-            return <Card key={index} title={item.title} description={item.description} />;
-          })}
-        </div>
+        <ProjectList />
+      </section>
+
+      <section className="panel">
+        <PublicUsers />
       </section>
 
       <section className="grid-two">
