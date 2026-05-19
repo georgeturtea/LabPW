@@ -1,7 +1,24 @@
 const express = require('express');
 
 const app = express();
+const mongoose = require('mongoose');
 const PORT = 3000;
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/dashboard';
+
+async function startServer() {
+  try {
+    await mongoose.connect(MONGO_URI);
+    console.log('Conectat la MongoDB!');
+    app.listen(PORT, function () {
+      console.log('Server pornit pe http://localhost:' + PORT);
+    });
+  } catch (err) {
+    console.error('Eroare conectare MongoDB:', err.message);
+    process.exit(1);
+  }
+}
+
+
 
 app.use(express.json());
 
@@ -98,6 +115,4 @@ app.put('/api/projects/:id', function (req, res) {
   res.json(project);
 });
 
-app.listen(PORT, function () {
-  console.log('Server pornit pe http://localhost:' + PORT);
-});
+startServer();
