@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 
 const app = express();
 const mongoose = require('mongoose');
@@ -21,6 +22,7 @@ async function startServer() {
 
 
 
+app.use(cors());
 app.use(express.json());
 
 app.get('/', function (req, res) {
@@ -95,27 +97,33 @@ app.delete('/api/projects/:id', async function (req, res) {
   }
 });
 
-app.put('/api/projects/:id', function (req, res) {
-  const id = parseInt(req.params.id, 10);
-  const project = projects.find(function (p) {
-    return p.id === id;
-  });
+app.put('/api/projects/:id', async function (req, res) {
+  try {
+    const update = {};
 
-  if (!project) {
-    return res.status(404).json({ error: 'Not found' });
-  }
+    if (typeof req.body.title !== 'undefined') {
+      update.title = req.body.title;
+    }
+    if (typeof req.body.tech !== 'undefined') {
+      update.tech = req.body.tech;
+    }
+    if (typeof req.body.done !== 'undefined') {
+      update.done = req.body.done;
+    }
 
-  if (typeof req.body.title !== 'undefined') {
-    project.title = req.body.title;
-  }
-  if (typeof req.body.tech !== 'undefined') {
-    project.tech = req.body.tech;
-  }
-  if (typeof req.body.done !== 'undefined') {
-    project.done = req.body.done;
-  }
+    const updated = await Project.findByIdAndUpdate(req.params.id, update, {
+      new: true,
+      runValidators: true,
+    });
 
-  res.json(project);
+    if (!updated) {
+      return res.status(404).json({ error: 'Not found' });
+    }
+
+    res.json(updated);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
 });
 
 startServer();
