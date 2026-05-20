@@ -13,7 +13,7 @@ function App() {
     <BrowserRouter>
       <div className="app-shell">
         <header className="app-header">
-          <h1>Dashboard React - Lab 8</h1>
+          <h1>Dashboard React - Laboratorul 11</h1>
           <p>Navigare intre pagini cu React Router</p>
         </header>
 

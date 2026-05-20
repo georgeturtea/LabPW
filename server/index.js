@@ -52,21 +52,15 @@ app.get('/api/projects/:id', async function (req, res) {
   }
 });
 
-// app.get('/api/stats', function (req, res) {
-//   const done = projects.filter(function (p) {
-//     return p.done;
-//   }).length;
-//
-//   const inWork = projects.filter(function (p) {
-//     return !p.done;
-//   }).length;
-//
-//   res.json({
-//     total: projects.length,
-//     done: done,
-//     inWork: inWork,
-//   });
-// });
+app.get('/api/stats', async function (req, res) {
+  try {
+    const total = await Project.countDocuments();
+    const done = await Project.countDocuments({ done: true });
+    res.json({ total: total, done: done, inProgress: total - done });
+  } catch (err) {
+    res.status(500).json({ error: 'Eroare server: ' + err });
+  }
+});
 
 app.post('/api/projects', async function (req, res) {
   try {
@@ -99,22 +93,11 @@ app.delete('/api/projects/:id', async function (req, res) {
 
 app.put('/api/projects/:id', async function (req, res) {
   try {
-    const update = {};
-
-    if (typeof req.body.title !== 'undefined') {
-      update.title = req.body.title;
-    }
-    if (typeof req.body.tech !== 'undefined') {
-      update.tech = req.body.tech;
-    }
-    if (typeof req.body.done !== 'undefined') {
-      update.done = req.body.done;
-    }
-
-    const updated = await Project.findByIdAndUpdate(req.params.id, update, {
-      new: true,
-      runValidators: true,
-    });
+    const updated = await Project.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
 
     if (!updated) {
       return res.status(404).json({ error: 'Not found' });

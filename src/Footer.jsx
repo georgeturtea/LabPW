@@ -1,7 +1,7 @@
 function Footer() {
   return (
     <footer className="app-footer">
-      <p>Lab 8 Node.js + Express - Dashboard</p>
+      <p>Laboratorul 11 Node.js + Express - Dashboard</p>
     </footer>
   );
 }

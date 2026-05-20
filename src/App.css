@@ -1,35 +1,46 @@
 .app-shell {
-  max-width: 980px;
-  margin: 24px auto;
-  padding: 0 16px 40px;
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 12px 16px 40px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .app-header {
-  background: linear-gradient(135deg, #0f766e, #155e75);
+  background: linear-gradient(135deg, #0f766e 0%, #155e75 50%, #0d9488 100%);
   color: #f8fafc;
-  padding: 24px;
+  padding: 32px 24px;
   border-radius: 16px;
-  box-shadow: 0 10px 24px rgba(2, 6, 23, 0.15);
-  margin-bottom: 20px;
+  box-shadow: 0 10px 30px rgba(15, 118, 110, 0.15);
+  margin-bottom: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .app-header h1 {
-  margin: 0 0 6px;
-  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  margin: 0 0 8px;
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
+  letter-spacing: -1px;
 }
 
 .app-header p {
   margin: 0;
-  opacity: 0.95;
+  opacity: 0.9;
+  font-size: 1rem;
 }
 
 .panel {
   background: #ffffff;
-  border: 1px solid #dbe7ef;
+  border: 1px solid #e2e8f0;
   border-radius: 14px;
-  padding: 16px;
-  margin-bottom: 16px;
-  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  transition: all 0.3s ease;
+}
+
+.panel:hover {
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);
 }
 
 .counter-panel p {
@@ -51,7 +62,48 @@
 .project-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 12px;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.project-item {
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-item:hover {
+  border-color: #94a3b8;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+  transform: translateY(-6px);
+}
+
+.editing-form {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border: 2px solid #7dd3fc;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.editing-form h4 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: #0369a1;
+}
+
+.editing-form input {
+  margin-bottom: 10px;
+}
+
+.button-group {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
 }
 
 .project-card {
@@ -92,30 +144,111 @@ button {
 input,
 textarea {
   width: 100%;
-  border: 1px solid #b9ccda;
+  border: 2px solid #e2e8f0;
   border-radius: 10px;
-  padding: 10px 12px;
+  padding: 11px 14px;
   box-sizing: border-box;
   background: #ffffff;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  color: #1e293b;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #0f766e;
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #94a3b8;
 }
 
 textarea {
-  min-height: 110px;
+  min-height: 120px;
   resize: vertical;
 }
 
 button {
   border: none;
   border-radius: 10px;
-  padding: 10px 14px;
-  background: #0f766e;
+  padding: 11px 16px;
+  background: linear-gradient(135deg, #0f766e 0%, #0d9488 100%);
   color: #ffffff;
   font-weight: 600;
   cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  border: 1px solid transparent;
 }
 
-button:hover {
-  background: #0b5f59;
+button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #0b5f59 0%, #0a7d76 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(15, 118, 110, 0.25);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn {
+  padding: 9px 14px;
+  font-size: 0.88rem;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.btn-delete {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+}
+
+.btn-delete:hover {
+  background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+}
+
+.btn-edit {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+}
+
+.btn-edit:hover {
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.btn-toggle {
+  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+}
+
+.btn-toggle:hover {
+  background: linear-gradient(135deg, #15803d 0%, #166534 100%);
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+}
+
+.btn-save {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+}
+
+.btn-save:hover {
+  background: linear-gradient(135deg, #047857 0%, #065f46 100%);
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+}
+
+.btn-cancel {
+  background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+}
+
+.btn-cancel:hover {
+  background: linear-gradient(135deg, #4b5563 0%, #374151 100%);
+  box-shadow: 0 4px 12px rgba(107, 114, 128, 0.3);
 }
 
 .todo-list {
@@ -141,7 +274,26 @@ button:hover {
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
+  background: linear-gradient(135deg, #f0f9ff 0%, #f5fbff 100%);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+}
+
+.contact-form input {
+  border: 2px solid #cbd5e1;
+}
+
+.contact-form input:focus {
+  outline: none;
+  border-color: #0f766e;
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1);
+}
+
+.contact-form button {
+  margin-top: 8px;
 }
 
 .feedback {
@@ -164,26 +316,78 @@ button:hover {
   color: #0f172a;
 }
 
+.filters-container {
+  display: flex;
+  gap: 12px;
+  margin: 12px 0 16px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
 .search-input {
-  margin: 10px 0 14px;
+  flex: 1;
+  min-width: 200px;
+  margin: 0 !important;
+  border: 2px solid #cbd5e1 !important;
+}
+
+.filter-select {
+  padding: 11px 14px;
+  border: 2px solid #cbd5e1;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #1e293b;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-select:hover {
+  border-color: #0f766e;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: #0f766e;
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1);
 }
 
 .status-chip {
   margin-top: 8px;
   font-size: 0.9rem;
-  color: #1f4d69;
   font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+.status-done {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.status-inwork {
+  background: #fef3c7;
+  color: #92400e;
 }
 
 .stats-box {
-  margin-top: 14px;
-  padding: 12px;
-  border: 1px solid #d9e4ee;
-  border-radius: 10px;
-  background: #f8fbff;
+  margin-top: 16px;
+  padding: 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f0f9ff 0%, #f5fbff 100%);
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.stats-box p {
+  margin: 0;
+  font-weight: 600;
+  color: #1e293b;
 }
 
 .error-text {
@@ -212,27 +416,38 @@ button:hover {
 
 nav {
   display: flex;
-  gap: 12px;
-  padding: 14px;
+  gap: 8px;
+  padding: 12px 16px;
   border-radius: 12px;
-  background: #2c3e50;
-  margin-bottom: 16px;
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  margin-bottom: 20px;
   flex-wrap: wrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 nav a {
-  color: #ffffff;
+  color: #cbd5e1;
   text-decoration: none;
-  padding: 8px 14px;
+  padding: 10px 16px;
   border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
 }
 
 nav a:hover {
-  background: #34495e;
+  background: rgba(255, 255, 255, 0.1);
+  color: #f8fafc;
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 nav a.active {
-  background: #ff7733;
+  background: linear-gradient(135deg, #0f766e 0%, #0d9488 100%);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(15, 118, 110, 0.3);
 }
 
 .route-content {
@@ -240,12 +455,19 @@ nav a.active {
 }
 
 .app-footer {
-  margin-top: 14px;
-  background: #0f172a;
-  color: #f8fafc;
+  margin-top: auto;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: #cbd5e1;
   border-radius: 12px;
-  padding: 14px;
+  padding: 20px;
   text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.app-footer p {
+  margin: 0;
 }
 
 @media (max-width: 640px) {
